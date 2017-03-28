@@ -218,12 +218,10 @@ class Template
 	}
 	
 	/**
-	 * <pre>
 	 * 解析数组和对象格式调用
 	 * 数组: {$arr.name.length }, {$arr.key } 支持数组级联操作,不支持数组对象混合级联操作
 	 * 对象: {$user->name }, 支持对象的属性级联操作,不支持数组对象混合级联操作
 	 * @param string $args 	{$user.age|md5|substr=###,0,10 }的第一个竖线(|)之前的字符串传递给该参数
-	 * </pre>
 	 */
 	protected function parseObjArrVarPart($args){
 		if(strpos($args,'.') !== false){ //数组
@@ -240,11 +238,9 @@ class Template
 	}
 	
 	/**
-	 * <pre>
 	 * 函数调用: {$var|substr=###,0,10|md5 }, 支持一个或多个函数,不能和 default 一起使用,###代表该变量,是一个占位符
 	 * 	函数的参数必须是和 php 代码中的写法一致,如若是字符串则需要加引号
 	 * @param string $args	{$user.age|md5|substr=###,0,10 }的第一个竖线(|)之后的每一部分都会传递给该参数,eg: md5或者substr=###,0,10
-	 * </pre>
 	 */
 	protected function parseFuncPart($args){
 		$arra = array_map('trim', explode('=',$args)); //分隔函数名和参数列表
