@@ -34,27 +34,24 @@ class Template
 	// 缓存文件
 	private $cacheFile = '';
 	
-	public final function __construct(){
+	public final function __construct() {
 		$this->registerSysVariables();
 	}
 	
 	/**
-	 * <pre>
 	 * 注册系统变量
-	 * 支持的系统变量有: session get post cookie request env server
+	 * 支持的系统变量有: session get post cookie request server
 	 * 支持常量获取: {$sysvar.const }
-	 * </pre>
 	 */
-	protected function registerSysVariables(){
+	protected final function registerSysVariables() {
 		$this->_vars['sysvar'] = array(
 			'get' 	 => $_GET,
 			'post'	 => $_POST,
 			'request' => $_REQUEST,
-			'env' 	 => $_ENV,
 			'cookie' => $_COOKIE,
-			'server' => array_change_key_case($_SERVER,CASE_LOWER),
+			'server' => array_change_key_case($_SERVER, CASE_LOWER),
 			'session'=> isset($_SESSION) ? $_SESSION : array(),
-			'const'  => array_change_key_case(get_defined_constants(),CASE_LOWER)
+			'const'  => array_change_key_case(get_defined_constants(true)['user'], CASE_LOWER)
 		);
 	}
 	

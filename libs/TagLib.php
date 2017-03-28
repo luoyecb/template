@@ -5,9 +5,9 @@
 abstract class AttributesParser
 {
 	// Template 类的实例
-	protected $template = null;
+	protected $template;
 
-	public function __construct($tpl=null){
+	public function __construct(Template $tpl=null){
 		if($tpl instanceof Template){
 			$this->template = $tpl;
 		}
