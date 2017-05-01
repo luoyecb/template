@@ -235,13 +235,11 @@ class CoreTagLib extends TagLibSupport
 		'switch'	=> array('attrs'=>'name'),
 		'if'		=> array('attrs'=>'test'),
 		'elseif'	=> array('attrs'=>'test'),
-		'elif'		=> array('attrs'=>'test'), // elseif 的别名
 		'in'		=> array('attrs'=>'name,value'),
 		'between'	=> array('attrs'=>'name,value'),
 		'assign'	=> array('attrs'=>'name,value'),
 		'php'		=> array(),
 		'else'		=> array(),
-		'token'		=> array(),
 		'cfgload' 	=> array('attrs'=>'path,file'), //加载配置文件(.ini类型)
 		'config'	=> array('attrs'=>'name'), //读取配置
 		'foreach'	=> array(),
@@ -316,19 +314,6 @@ class CoreTagLib extends TagLibSupport
 	}
 
 	/**
-	 * 表单令牌, 防止表单重复提交
-	 * {token/}
-	 */
-	public function _start_token($attrs){
-		if(isset($_SESSION)){
-			$key = md5(microtime() . rand(0, 100000));
-			$_SESSION['TOKEN_NAME'] = $key;
-			return '<input type="hidden" name="TOKEN_NAME" value="'.$key.'"/>';
-		}
-		return '';
-	}
-
-	/**
 	 * 循环输出变量
 	 * {loop name="" item="" key="k" index='index'} {$user.name} {/loop}
 	 * 属性 name: 指明被循环的变量
@@ -386,14 +371,6 @@ class CoreTagLib extends TagLibSupport
 	public function _start_elseif($attrs){
 		$test = $this->parseAttrTest($attrs['test']);
 		return "<?php }elseif({$test }){ ?>";
-	}
-
-	/**
-	 * elseif 标签的别名
-	 * {elif /}
-	 */
-	public function _start_elif($attrs){
-		return $this->_start_elseif($attrs);
 	}
 
 	/**

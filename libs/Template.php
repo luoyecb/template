@@ -55,19 +55,6 @@ class Template
 		);
 	}
 	
-	// 表单令牌验证
-	public function checkToken(){
-		if(isset($_SESSION['TOKEN_NAME'],$_REQUEST['TOKEN_NAME'])){
-			if($_SESSION['TOKEN_NAME'] != $_REQUEST['TOKEN_NAME']){
-				$referer = $_SERVER['HTTP_REFERER'];
-				header('Refresh: 3;url=' . $referer);
-				echo '表单重复提交，请<a href="' . $referer . '">返回</a>后刷新页面再试！';
-				exit();
-			}
-			$_SESSION['TOKEN_NAME'] = md5(microtime()); //重新生成
-		}
-	}
-	
 	// 单实例
 	public function instance($className){
 		static $clsContainer = array();
