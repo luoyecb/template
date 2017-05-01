@@ -36,6 +36,36 @@ abstract class AbstractTagLib
 }
 
 /**
+ * 测试新的思路, 暂时不行
+ */
+class MyTag extends AbstractTagLib
+{
+	// 标签数组定义
+	protected $tags = [];
+	
+	public function parse(&$tplData)
+	{
+		$offset = 0;
+		$len = strlen($tplData);
+		
+		$state = 0;
+		$input = 0;
+		
+		while($offset < $len)
+		{
+			
+		}
+		
+		return $tplData;
+	}
+	
+	protected function inputType($char)
+	{
+		
+	}
+}
+
+/**
  * 标签解析, 无法获取标签中间内容
  */
 abstract class TagLibSupport extends AbstractTagLib

@@ -252,6 +252,7 @@ class Template
 
 	// 解析模板
 	protected function parse(&$data){
+		$data = $this->instance('MyTag')->parse($data);
 		// 模板继承解析
 		$ex = $this->instance('TemplateInheritTagLib');
 		$data = $ex->restoreBlock($ex->parse($data));
